@@ -1,0 +1,60 @@
+{% extends "layout.html" %}
+
+
+{% block nav %}
+<section class="gallery">
+    <a href="{{ url_for('home') }}">
+    <figure class="cardmenu">
+        <div class="feature">
+             <<
+        </div>
+        </figure>
+    </a>
+    <a href="{{ url_for('mineral') }}">
+    <figure class="cardmenu">
+        <div class="feature">
+             <
+        </div>
+        </figure>
+    </a>
+    <a href="{{ url_for('min_res') }}">
+    <figure class="cardmenu">
+        <div class="feature">
+             Полезные ископаемые
+        </div>
+        </figure>
+    </a>
+    <a href="{{ url_for('rock') }}">
+    <figure class="cardmenu">
+        <div class="feature">
+             Горные породы
+        </div>
+        </figure>
+    </a>
+    <a href="{{ url_for('method') }}">
+        <figure class="cardmenu">
+            <div class="feature">
+             Методы поиска
+            </div>
+        </figure>
+    </a>
+      </section>
+{% endblock %}
+
+{% block content %}
+{% for mineral in mineral:%}
+  <h2>Минералы</h2>
+  <h3>{{mineral.name}}</h3>
+  <section class="gallery">
+      <figure class="card" style="width: 40%">
+        <div class="feature">
+       {{mineral.name}}
+        </div>
+        <figcaption class="caption"> {{mineral.description}}</figcaption>
+    </figure>
+    <figure class="card" style="width: 50%">
+        <figcaption class="caption"> <img src= "{{ url_for('static', filename='img/') }}{{ mineral.pic }}"  width="200"  alt="{{mineral.name}}" title="{{mineral.name}}" border="1"/></figcaption>
+    </figure>
+  </section>
+{% endfor %}
+{% endblock %}

@@ -1,0 +1,51 @@
+{% extends "layout.html" %}
+
+{% block nav %}
+<section class="gallery">
+    <a href="{{ url_for('home') }}">
+    <figure class="card">
+        <div class="feature">
+             <<
+        </div>
+        </figure>
+    </a>
+    <a href="{{ url_for('min_res') }}">
+    <figure class="card">
+        <div class="feature">
+             Полезные ископаемые
+        </div>
+        </figure>
+    </a>
+    <a href="{{ url_for('rock') }}">
+        <figure class="card">
+            <div class="feature">
+             Горные породы
+            </div>
+        </figure>
+    </a>
+    <a href="{{ url_for('method') }}">
+        <figure class="card">
+            <div class="feature">
+             Методы поиска
+            </div>
+        </figure>
+    </a>
+      </section>
+{% endblock %}
+
+{% block content %}
+    <h2>Список материалов</h2>
+    <ul>
+    {% for page in pages %}
+        <li>
+            <a href="{{ url_for("page", path=page.path) }}">{{ page.title }}</a>
+        </li>
+    {% else %}
+        <li>Нет материалов.</li>
+    {% endfor %}
+    </ul>
+
+{% endblock content %}
+
+
+</div>

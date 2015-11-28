@@ -1,0 +1,51 @@
+{% extends "layout.html" %}
+
+{% block nav %}
+<section class="gallery">
+    <a href="{{ url_for('home') }}">
+    <figure class="card">
+        <div class="feature">
+             <<
+        </div>
+        </figure>
+    </a>
+    <a href="{{ url_for('min_res') }}">
+        <figure class="card">
+            <div class="feature">
+             Полезные ископаемые
+            </div>
+        </figure>
+    </a>
+    <a href="{{ url_for('method') }}">
+        <figure class="card">
+            <div class="feature">
+             Методы поиска
+            </div>
+        </figure>
+    </a>
+    <a href="{{ url_for('mineral') }}">
+        <figure class="card">
+            <div class="feature">
+             Минералы
+            </div>
+        </figure>
+    </a>
+</section>
+{% endblock %}
+
+{% block content %}
+  <h2>Горные породы</h2>
+  <h3>Выберите интересующую Вас горную породу</h3>
+  <section class="gallery">
+    {% for rock in rock_list:%}
+    <a href="{{ url_for('rock_id', id=rock.id) }}">
+    <figure class="card" style="width: 30%">
+        <div class="feature">
+             {{rock['name']}}
+         </div>
+         <figcaption class="caption"><strong>{{ rock['name']}}</strong> {{rock['note']}}</figcaption>
+     </figure>
+     </a>
+    {% endfor %}
+   </section>
+{% endblock %}

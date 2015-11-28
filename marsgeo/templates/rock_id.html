@@ -1,0 +1,64 @@
+{% extends "layout.html" %}
+
+
+{% block nav %}
+<section class="gallery">
+    <a href="{{ url_for('home') }}">
+    <figure class="card">
+        <div class="feature">
+             <<
+        </div>
+        </figure>
+    </a>
+    <a href="{{ url_for('rock') }}">
+    <figure class="card">
+        <div class="feature">
+             <
+        </div>
+        </figure>
+    </a>
+    <a href="{{ url_for('min_res') }}">
+    <figure class="card">
+        <div class="feature">
+             Полезные ископаемые
+        </div>
+        </figure>
+    </a>
+    <a href="{{ url_for('method') }}">
+        <figure class="card">
+            <div class="feature">
+             Методы поиска
+            </div>
+        </figure>
+    </a>
+    <a href="{{ url_for('mineral') }}">
+        <figure class="card">
+            <div class="feature">
+             Минералы
+            </div>
+        </figure>
+    </a>
+      </section>
+{% endblock %}
+
+{% block content %}
+{% for rock in rock:%}
+  <h2>Горные породы</h2>
+  <h3>{{rock.name}}</h3>
+  <section class="gallery">
+      <figure class="card" style="width: 50%">
+        <div class="feature">
+       {{rock.name}}
+        </div>
+        <figcaption class="caption"> <img src= "{{ url_for('static', filename='img/') }}{{ rock.pic }}"  width="150"  alt="{{rock.name}}" title="{{rock.name}}" border="1"/> </figcaption>
+        <figcaption class="caption">{{rock.description}} </figcaption>
+    </figure>
+     <figure class="card" style="width: 40%">
+         <div class="feature">
+       Методика поиска
+        </div>
+        <figcaption class="caption">Для поиска горной породы - <strong>{{rock.name}}</strong> рекомендуется использовать следующие геофизические показатели: <br/><br/>{% for methods_rock in methods_rock:%} {{methods_rock.name}} <strong>{{methods_rock.value}}%</strong><br/> {% endfor %} <br/>* Внимание! Залегающие рядом горные породы могут менять геофизические показатели!</figcaption>
+    </figure>
+  </section>
+{% endfor %}
+{% endblock %}

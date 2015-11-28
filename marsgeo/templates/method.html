@@ -1,0 +1,50 @@
+{% extends "layout.html" %}
+
+{% block nav %}
+<section class="gallery">
+    <a href="{{ url_for('home') }}">
+    <figure class="card">
+        <div class="feature">
+             <<
+        </div>
+        </figure>
+    </a>
+    <a href="{{ url_for('min_res') }}">
+        <figure class="card">
+            <div class="feature">
+             Полезные ископаемые
+            </div>
+        </figure>
+    </a>
+    <a href="{{ url_for('rock') }}">
+        <figure class="card">
+            <div class="feature">
+             Горные породы
+            </div>
+        </figure>
+    </a>
+    <a href="{{ url_for('mineral') }}">
+        <figure class="card">
+            <div class="feature">
+             Минералы
+            </div>
+        </figure>
+    </a>
+</section>
+{% endblock %}
+{% block content %}
+  <h2>Поисковые методы</h2>
+  <h3>Выберите интересующий Вас поисковый метод</h3>
+  <section class="gallery">
+    {% for method in method_list:%}
+    <figure class="card" style="width: 237px;">
+     <div class="feature_long" style="background-color: #701804;">
+             {{ method['name']}}
+        </div>
+        <figcaption class="caption">{{ method['description']}}</figcaption>
+    </figure>
+    {% endfor %}
+    </section>
+{% endblock %}
+
+

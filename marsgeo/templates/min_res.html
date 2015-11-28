@@ -1,0 +1,52 @@
+{% extends "layout.html" %}
+
+
+{% block nav %}
+<section class="gallery">
+    <a href="{{ url_for('home') }}">
+    <figure class="card">
+        <div class="feature">
+             <<
+        </div>
+        </figure>
+    </a>
+    <a href="{{ url_for('rock') }}">
+        <figure class="card">
+            <div class="feature">
+             Горные породы
+            </div>
+        </figure>
+    </a>
+    <a href="{{ url_for('method') }}">
+        <figure class="card">
+            <div class="feature">
+             Методы поиска
+            </div>
+        </figure>
+    </a>
+    <a href="{{ url_for('mineral') }}">
+        <figure class="card">
+            <div class="feature">
+             Минералы
+            </div>
+        </figure>
+    </a>
+      </section>
+{% endblock %}
+
+{% block content %}
+  <h2>Полезные ископаемые</h2>
+  <h3>Выберите интересующее Вас полезное ископаемое</h3>
+  <section class="gallery">
+    {% for min_res in min_res_list:%}
+    <a href="{{ url_for('min_res_id', id=min_res.id) }}">
+    <figure class="card" style="width: 22%">
+        <div class="feature">
+             {{min_res['formula']}}
+        </div>
+        <figcaption class="caption"><strong>{{ min_res['name']}}</strong></figcaption>
+    </figure>
+    </a>
+    {% endfor %}
+  </section>
+{% endblock %}

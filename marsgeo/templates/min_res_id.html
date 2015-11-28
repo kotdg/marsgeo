@@ -1,0 +1,65 @@
+{% extends "layout.html" %}
+
+
+{% block nav %}
+<section class="gallery">
+    <a href="{{ url_for('home') }}">
+    <figure class="card">
+        <div class="feature">
+             <<
+        </div>
+        </figure>
+    </a>
+    <a href="{{ url_for('min_res') }}">
+    <figure class="card">
+        <div class="feature">
+             <
+        </div>
+        </figure>
+    </a>
+    <a href="{{ url_for('rock') }}">
+        <figure class="card">
+            <div class="feature">
+             Горные породы
+            </div>
+        </figure>
+    </a>
+    <a href="{{ url_for('method') }}">
+        <figure class="card">
+            <div class="feature">
+             Методы поиска
+            </div>
+        </figure>
+    </a>
+    <a href="{{ url_for('mineral') }}">
+        <figure class="card">
+            <div class="feature">
+             Минералы
+            </div>
+        </figure>
+    </a>
+      </section>
+{% endblock %}
+
+{% block content %}
+{% for min_res in min_res:%}
+  <h2>Полезные ископаемые</h2>
+  <h3>{{min_res.name}} ({{min_res.formula}})</h3>
+  <section class="gallery">
+      <figure class="card" style="width: 50%">
+        <div class="feature">
+       {{min_res.name}} ({{min_res.formula}})
+        </div>
+        <figcaption class="caption">
+         <img src= "{{ url_for('static', filename='img/') }}{{ min_res.pic }}"  width="200"  alt="{{min_res.name}}" title="{{min_res.name}}" border="1"/>
+      {{min_res.description}}</figcaption>
+        </figure>
+     <figure class="card" style="width: 45%">
+         <div class="feature">
+       Горные породы
+        </div>
+        <figcaption class="caption">{% for min_min_res in min_min_res:%} <a href="{{ url_for('rock_id', id=min_min_res.id) }}">{{min_min_res.name}}</a><br/> {% endfor %}</figcaption>
+    </figure>
+  </section>
+{% endfor %}
+{% endblock %}

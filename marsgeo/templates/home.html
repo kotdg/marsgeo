@@ -1,0 +1,33 @@
+{% extends "layout.html" %}
+{% block content %}
+   <section class="gallery">
+    <a href="{{ url_for('min_res') }}">
+     <figure class="card" style="width: 45%;">
+        <div class="feature">
+             Полезные ископаемые
+        </div>
+    </figure>
+    </a>
+     <a href="{{ url_for('rock') }}">
+    <figure class="card" style="width: 45%;">
+        <div class="feature">
+             Горные породы
+        </div>
+        </figure>
+    </a>
+    <a href="{{ url_for('method') }}">
+    <figure class="card" style="width: 45%;">
+        <div class="feature">
+             Методы поиска
+        </div>
+    </figure>
+    </a>
+    <a href="{{ url_for('mineral') }}">
+    <figure class="card" style="width: 45%;">
+        <div class="feature">
+             Минералы
+        </div>
+        </figure>
+        </a>
+      </section>
+{% endblock %}
