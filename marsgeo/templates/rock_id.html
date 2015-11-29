@@ -53,11 +53,11 @@
         <figcaption class="caption"> <img src= "{{ url_for('static', filename='img/') }}{{ rock.pic }}"  width="150"  alt="{{rock.name}}" title="{{rock.name}}" border="1"/> </figcaption>
         <figcaption class="caption">{{rock.description}} </figcaption>
     </figure>
-     <figure class="card" style="width: 40%">
+     <figure class="card" style="width: 45%">
          <div class="feature">
        Методика поиска
         </div>
-        <figcaption class="caption">Для поиска горной породы - <strong>{{rock.name}}</strong> рекомендуется использовать следующие геофизические показатели: <br/><br/>{% for methods_rock in methods_rock:%} {{methods_rock.name}} <strong>{{methods_rock.value}}%</strong><br/> {% endfor %} <br/>* Внимание! Залегающие рядом горные породы могут менять геофизические показатели!</figcaption>
+        <figcaption class="caption">Для поиска горной породы - <strong>{{rock.name}}</strong> рекомендуется использовать следующие геофизические показатели: <br/><br/>{% for methods_rock in methods_rock:%} {{methods_rock.name}} <strong>{{methods_rock.value}}%</strong><br/> {% endfor %} <br/>* Внимание! Залегающие рядом горные породы могут влиять на геофизические показатели!</figcaption>
     </figure>
   </section>
 {% endfor %}

@@ -10,11 +10,18 @@
         </div>
         </figure>
     </a>
-    <a href="{{ url_for('min_res') }}">
+    <a href="{{ url_for('method') }}">
     <figure class="card">
         <div class="feature">
              <
         </div>
+        </figure>
+    </a>
+    <a href="{{ url_for('min_res') }}">
+        <figure class="card">
+            <div class="feature">
+             Методы поиска
+            </div>
         </figure>
     </a>
     <a href="{{ url_for('rock') }}">
@@ -24,13 +31,7 @@
             </div>
         </figure>
     </a>
-    <a href="{{ url_for('method') }}">
-        <figure class="card">
-            <div class="feature">
-             Методы поиска
-            </div>
-        </figure>
-    </a>
+
     <a href="{{ url_for('mineral') }}">
         <figure class="card">
             <div class="feature">
@@ -42,24 +43,26 @@
 {% endblock %}
 
 {% block content %}
-{% for min_res in min_res:%}
-  <h2>Полезные ископаемые</h2>
-  <h3>{{min_res.name}} ({{min_res.formula}})</h3>
+{% for method in method: %}
+  <h2>Методы поиска</h2>
+  <h3>{{method.name}}</h3>
   <section class="gallery">
       <figure class="card" style="width: 50%">
         <div class="feature">
-       {{min_res.name}} ({{min_res.formula}})
+       {{method.name}}
         </div>
         <figcaption class="caption">
-         <img src= "{{ url_for('static', filename='img/') }}{{ min_res.pic }}"  width="200"  alt="{{min_res.name}}" title="{{min_res.name}}" border="1"/>
-      {{min_res.description}}</figcaption>
+         <img src= "{{ url_for('static', filename='img/') }}{{ method.pic }}"  width="200"  alt="{{method.name}}" title="{{method.name}}" border="1"/>
+      {{method.description}}</figcaption>
         </figure>
      <figure class="card" style="width: 45%">
          <div class="feature">
        Горные породы
         </div>
-        <figcaption class="caption">{% for rock in rocks:%} <a href="{{ url_for('rock_id', id=rock.id) }}">{{rock.name}}</a><br/> {% endfor %}</figcaption>
+        <figcaption class="caption">Основной метод для поиска следующих горных пород:<br/> <br/>{% for rocks in rocks: %} <a href="{{ url_for('rock_id', id=rocks.id) }}"><strong>{{rocks.name}}</strong></a><br/> {% endfor %}</figcaption>
     </figure>
   </section>
 {% endfor %}
 {% endblock %}
+
+

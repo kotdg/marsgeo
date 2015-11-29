@@ -1,11 +1,12 @@
 from marsgeo import app
-from flask import Flask, render_template, request, flash, session, redirect, url_for
+from flask import render_template, session
 from sqlalchemy.orm import Session
-from sqlalchemy import create_engine, MetaData
+from sqlalchemy import create_engine
 from sqlalchemy.ext.automap import automap_base
 
-Base = automap_base()
+
 engine = create_engine("mysql://root:jeesetfa@localhost/MarsGeo?charset=utf8")
+Base = automap_base()
 Base.prepare(engine, reflect=True)
 MinResurs = Base.classes.min_res
 Minerals = Base.classes.mineral
@@ -14,8 +15,10 @@ Methods = Base.classes.method
 MethodsRock = Base.classes.method_rock
 Min_min_res = Base.classes.min_min_res
 Rock_min = Base.classes.rock_min
+
+
 session = Session(engine)
-session.commit()
+
 
 
 @app.route('/')
@@ -30,8 +33,8 @@ def min_res():
 @app.route('/min_res/<int:id>', methods=['GET'])
 def min_res_id(id):
     min_res = session.query(MinResurs.name, MinResurs.formula, MinResurs.id, MinResurs.description, MinResurs.pic).filter(MinResurs.id == id)
-    min_min_res = session.query(Rocks.name, Min_min_res, Rock_min, Rocks.id).filter(Rock_min.id_rock==Rocks.id).filter(Rock_min.id_mineral==Min_min_res.id_mineral).filter(Min_min_res.id_min_res==id).all()
-    return render_template('min_res_id.html', min_res=min_res, min_min_res=min_min_res)
+    rocks = session.query(Rocks.name, Rocks.id).filter(Rock_min.id_rock == Rocks.id).filter(Rock_min.id_mineral == Minerals.id).filter(Min_min_res.id_mineral == Minerals.id).filter(Min_min_res.id_min_res == MinResurs.id).filter(MinResurs.id == id).all()
+    return render_template('min_res_id.html', min_res=min_res, rocks=rocks)
 
 @app.route('/mineral')
 def mineral():
@@ -51,18 +54,21 @@ def rock():
 @app.route('/rock/<int:id>', methods=['GET'])
 def rock_id(id):
     rock = session.query(Rocks.name, Rocks.id, Rocks.description, Rocks.pic).filter(Rocks.id == id)
-    methods_rock = session.query(MethodsRock.id, MethodsRock.value, Methods.name).filter(Methods.id==MethodsRock.id_method).filter(MethodsRock.id_rock == id)
+    methods_rock = session.query(MethodsRock.id, MethodsRock.value, Methods.name).filter(Methods.id == MethodsRock.id_method).filter(MethodsRock.id_rock == id)
     return render_template('rock_id.html', rock=rock, methods_rock=methods_rock)
+
 
 @app.route('/method')
 def method():
-    method_list = session.query(Methods.name, Methods.description).order_by(Methods.name)
+    method_list = session.query(Methods.id, Methods.name, Methods.description).order_by(Methods.name)
     return render_template('method.html', method_list=method_list)
 
-@app.route('/method/<id>')
-def method_id():
-   return render_template('method_id.html', id=id)
 
+@app.route('/method/<int:id>', methods=['GET'])
+def method_id(id):
+    method = session.query(Methods.id, Methods.name, Methods.description, Methods.pic).filter(Methods.id == id)
+    rocks = session.query(Rocks.name, Rocks.id).filter(MethodsRock.id_rock == Rocks.id).filter(MethodsRock.value > 60).filter(MethodsRock.id_method == id).order_by(Rocks.name).all()
+    return render_template('method_id.html', method=method, rocks=rocks)
 
 
 @app.route('/article')
@@ -70,7 +76,7 @@ def article():
     return render_template('article.html')
 
 
-
+session.close()
 
 
 

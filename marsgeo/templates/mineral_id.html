@@ -4,35 +4,35 @@
 {% block nav %}
 <section class="gallery">
     <a href="{{ url_for('home') }}">
-    <figure class="cardmenu">
+    <figure class="card">
         <div class="feature">
              <<
         </div>
         </figure>
     </a>
     <a href="{{ url_for('mineral') }}">
-    <figure class="cardmenu">
+    <figure class="card">
         <div class="feature">
              <
         </div>
         </figure>
     </a>
     <a href="{{ url_for('min_res') }}">
-    <figure class="cardmenu">
+    <figure class="card">
         <div class="feature">
              Полезные ископаемые
         </div>
         </figure>
     </a>
     <a href="{{ url_for('rock') }}">
-    <figure class="cardmenu">
+    <figure class="card">
         <div class="feature">
              Горные породы
         </div>
         </figure>
     </a>
     <a href="{{ url_for('method') }}">
-        <figure class="cardmenu">
+        <figure class="card">
             <div class="feature">
              Методы поиска
             </div>
@@ -46,7 +46,7 @@
   <h2>Минералы</h2>
   <h3>{{mineral.name}}</h3>
   <section class="gallery">
-      <figure class="card" style="width: 40%">
+      <figure class="card" style="width: 45%">
         <div class="feature">
        {{mineral.name}}
         </div>

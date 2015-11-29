@@ -40,11 +40,11 @@
   <section class="gallery">
     {% for min_res in min_res_list:%}
     <a href="{{ url_for('min_res_id', id=min_res.id) }}">
-    <figure class="card" style="width: 22%">
+    <figure class="card" style="width: 23%">
         <div class="feature">
              {{min_res['formula']}}
         </div>
-        <figcaption class="caption"><strong>{{ min_res['name']}}</strong></figcaption>
+        <figcaption class="caption"><strong>{{ min_res['name']}} {% if not min_res['name'] == min_res['formula'] %}({{min_res['formula']}}) {% endif %}</strong></figcaption>
     </figure>
     </a>
     {% endfor %}

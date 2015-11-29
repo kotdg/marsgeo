@@ -37,12 +37,14 @@
   <h3>Выберите интересующий Вас поисковый метод</h3>
   <section class="gallery">
     {% for method in method_list:%}
-    <figure class="card" style="width: 237px;">
+    <a href="{{ url_for('method_id', id=method.id) }}">
+    <figure class="card" style="width: 245px;">
      <div class="feature_long" style="background-color: #701804;">
              {{ method['name']}}
         </div>
         <figcaption class="caption">{{ method['description']}}</figcaption>
     </figure>
+    </a>
     {% endfor %}
     </section>
 {% endblock %}
